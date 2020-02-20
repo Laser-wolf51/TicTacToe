@@ -1,2 +1,3 @@
 # TicTacToe
-A python implementation for TicTacToe game, with unbeatable computer-player
+A python OOD implementation for TicTacToe game, with an unbeatable computer-player.
+
