@@ -1,11 +1,33 @@
 # Filename: players.py
 
 import abc
+
+from constants import *
 from board import Board
 
 
+def create_new_player(type_, sign, board: Board):
+	"""
+	Create a new player of type 'type_' with sign 'sign'.
+	'type_' must be HUMAN or COMPUTER.
+	'sign' must be X_SIGN or O_SIGN.
+	Otherwise - raises an exception.
+	"""
+	
+	# check input
+	assert type_ is HUMAN or type_ is COMPUTER, 'wrong player type'
+	assert sign is X_SIGN or sign is O_SIGN, 'wrong sign'
+	assert isinstance(board, Board)
+	
+	if type_ is HUMAN:
+		return HumanPlayer(sign, board)
+	else:
+		return ComPlayer(sign, board)
+	
+
 class Player(abc.ABC):
 	"""Abstract class, common to all kinds of players."""
+	
 	def __init__(self, sign, board: Board):
 		self._sign = sign
 		self._board = board
@@ -29,10 +51,10 @@ class HumanPlayer(Player):
 		super().__init__(sign, board)
 		
 		# checks the rival sign:
-		if sign is 'X':
-			self._rival = 'O'
-		elif sign is 'O':
-			self._rival = 'X'
+		if sign is X_SIGN:
+			self._rival = O_SIGN
+		elif sign is O_SIGN:
+			self._rival = X_SIGN
 	
 	def play(self):
 		"""Performs a single turn"""
@@ -43,7 +65,7 @@ class HumanPlayer(Player):
 
 class ComPlayer(Player):
 	"""
-	Create an unbeatable computer player and dfines its behaviour.
+	Create an unbeatable computer player and defines its behaviour.
 	Note: suitable only for a standard tic tac toe board.
 	"""
 	
@@ -53,15 +75,14 @@ class ComPlayer(Player):
 		super().__init__(sign, board)
 		
 		# checks the rival sign:
-		if sign is 'X':
-			self._rival = 'O'
-		elif sign is 'O':
-			self._rival = 'X'
+		if sign is X_SIGN:
+			self._rival = O_SIGN
+		elif sign is O_SIGN:
+			self._rival = X_SIGN
 	
 	def play(self):
 		"""Performs a single turn"""
 		
-		print('Im AI!!')
 		# preference 1: populate center
 		if self._board.square_is_empty(1,1):
 			self._board.put_sign(1, 1, self._sign)
@@ -90,10 +111,12 @@ class ComPlayer(Player):
 	
 	###### INTERNAL FUNCTIONS ########
 	def _instant_winning(self):
-		"""Try to win in 1 turn. If succeeded - returns 'SUCCEESS', 'FAIL'
-		otherwise."""
+		"""
+		Try to win in 1 turn. If succeeded - returns 'SUCCEESS', 'FAIL'
+		otherwise.
+		"""
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks a rows winning option
 		for row in range(self._board.size):
@@ -104,9 +127,9 @@ class ComPlayer(Player):
 				self._put_in_row(row)
 				return "SUCCESS"
 			
-			sings_counter = {'X': 0, 'O': 0, None: 0}
+			sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks columns winning option
 		for column in range(self._board.size):
@@ -117,9 +140,9 @@ class ComPlayer(Player):
 				self._put_in_column(column)
 				return "SUCCESS"
 			
-			sings_counter = {'X': 0, 'O': 0, None: 0}
+			sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks slant 1 winning option
 		for row in range(self._board.size):
@@ -129,7 +152,7 @@ class ComPlayer(Player):
 			self._put_in_slant1()
 			return "SUCCESS"
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks slant 2 winning option
 		for row in range(self._board.size):
@@ -142,11 +165,12 @@ class ComPlayer(Player):
 		return 'FAIL'
 	
 	def _instant_block(self):
-		"""Checks if there is a the rival can win in the next turn. If he can -
+		"""
+		Checks if there is a the rival can win in the next turn. If he can -
 		block the rival and returns 'SUCCEESS', 'FAIL' otherwise.
 		"""
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks a rows blocking option
 		for row in range(self._board.size):
@@ -157,9 +181,9 @@ class ComPlayer(Player):
 				self._put_in_row(row)
 				return "SUCCESS"
 			
-			sings_counter = {'X': 0, 'O': 0, None: 0}
+			sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks columns blocking option
 		for column in range(self._board.size):
@@ -170,9 +194,9 @@ class ComPlayer(Player):
 				self._put_in_column(column)
 				return "SUCCESS"
 			
-			sings_counter = {'X': 0, 'O': 0, None: 0}
+			sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks slant 1 blocking option
 		for row in range(self._board.size):
@@ -182,7 +206,7 @@ class ComPlayer(Player):
 			self._put_in_slant1()
 			return "SUCCESS"
 		
-		sings_counter = {'X': 0, 'O': 0, None: 0}
+		sings_counter = {X_SIGN: 0, O_SIGN: 0, None: 0}
 		
 		# checks slant 2 blocking option
 		for row in range(self._board.size):
@@ -195,7 +219,8 @@ class ComPlayer(Player):
 		return 'FAIL'
 	
 	def _is_special_case(self):
-		"""Checks if its a special case the the rest of the algorithm cannot
+		"""
+		Checks if its a special case the the rest of the algorithm cannot
 		handle.
 		"""
 		
@@ -219,8 +244,9 @@ class ComPlayer(Player):
 		self._board.put_sign(1, 0, self._sign)
 	
 	def _populate_corner(self):
-		"""Try to populate the first free corner. If succeeded - returns
-		'SUCCESS', or 'FAIL' otherwise.
+		"""
+		Try to populate the first free corner. If succeeded - returns 'SUCCESS',
+		or 'FAIL' otherwise.
 		"""
 		
 		if self._board.square_is_empty(0, 0):

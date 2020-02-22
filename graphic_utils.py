@@ -8,6 +8,7 @@ import turtle
 
 def draw_line(a, b, x, y):
     """Draw line from `(a, b)` to `(x, y)`."""
+    
     turtle.up()
     turtle.goto(a, b)
     turtle.down()
@@ -16,6 +17,7 @@ def draw_line(a, b, x, y):
 
 def draw_x(sqaure_size, row, column):
 		"""Draw X player."""
+		
 		turtle.pen(pensize=5, pencolor="red")
 
 		# calc X limits
@@ -30,6 +32,7 @@ def draw_x(sqaure_size, row, column):
 
 def draw_o(sqaure_size, row, column):
 		"""Draw O player."""
+		
 		turtle.pen(pensize=5, pencolor="blue")
 
 		# calc middle + radius

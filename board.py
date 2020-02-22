@@ -1,6 +1,7 @@
 # Filename: board.py
 
 import graphic_utils
+from constants import *
 
 class Board():
 	"""
@@ -47,11 +48,11 @@ class Board():
 			square.set_content(sign)
 			sign = square.get_content()
 			
-			if sign is 'X':
+			if sign is X_SIGN:
 				graphic_utils.draw_x(self.sqaure_size, row, column)
 				pass
 			
-			elif sign is 'O':
+			elif sign is O_SIGN:
 				graphic_utils.draw_o(self.sqaure_size, row, column)
 			
 			else:
@@ -90,7 +91,7 @@ class Square():
 	Mannages the content of a specific sqaure.
 	"""
 	def __init__(self):
-		self._content = None  # can have None/'X'/'O'.
+		self._content = None  # can have None/X_SIGN/O_SIGN.
 	
 	def get_content(self):
 		return self._content

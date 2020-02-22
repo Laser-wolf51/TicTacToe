@@ -4,12 +4,14 @@ from board import Board
 
 class GameLogic():
 	"""Checks winning/losing state for the given board and player."""
+	
 	def __init__(self, board: Board):
 		self._board = board
 		self._seq_to_win = 3
 	
 	def is_player_winner(self, player):
 		"""Checks winning state for the given player."""
+		
 		is_player_winner = False
 		
 		if self._has_row_winning(player):

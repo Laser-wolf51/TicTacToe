@@ -3,15 +3,21 @@
 from itertools import cycle
 from turtle import onscreenclick
 
+import constants
 import players
 from graphic_utils import announce
 from board import Board
 from logic import GameLogic
 """check 2"""
 
-# constant player types:
-HUMAN = 'h'
-COMPUTER = 'c'
+# constants for costume players:
+# player type:
+HUMAN = constants.HUMAN
+COMPUTER = constants.COMPUTER
+# player sign:
+X_SIGN = constants.X_SIGN
+O_SIGN = constants.O_SIGN
+
 
 class Game():
 	"""
@@ -20,57 +26,50 @@ class Game():
 	
 	Note: a turtle screen must be defined before creating a game object.
 	"""
+	
 	def __init__(self, player1: tuple, player2: tuple, sqaure_size=150):
 		"""
 		player1, player2 are tuples. the first item in each tuple specify
 		the type of player: use the variables HUMAN or COMPUTER. the second item
-		specify the sign ('X' or 'O')
+		specify the sign (X_SIGN or O_SIGN)
 		"""
 		
 		board_size = 3 # 3 squares each row/column.
-		self._sqaure_size = sqaure_size
 		self._board = Board(board_size, sqaure_size)
 		self._logic = GameLogic(self._board)
 		self._game_is_over = False
 		
 		# create a circular list of players
 		players_list = []
+		players_list.append(players.create_new_player(player1[0],player1[1],
+			self._board))
+		players_list.append(players.create_new_player(player2[0],player2[1],
+			self._board))
 		
-		# create player 1
-		if player1[0] is HUMAN:
-			players_list.append(players.HumanPlayer(player1[1], self._board))
-		elif player1[0] is COMPUTER:
-			players_list.append(players.ComPlayer(player1[1], self._board))
-		
-		# create player 2
-		if player2[0] is HUMAN:
-			players_list.append(players.HumanPlayer(player2[1], self._board))
-		elif player2[0] is COMPUTER:
-			players_list.append(players.ComPlayer(player2[1], self._board))
-			
 		self.players = cycle(players_list)
 		self.current_player = next(self.players)
 		
 		# define behaviour on click
 		onscreenclick(self._on_click)
+		
+		# draw gird
 		self._board.draw_grid()
 	
 	def run(self):
 		"""Main loop of events."""
 		
 		# only ComPlayer allow to enter this loop.
-		while (not self._game_is_over) and isinstance(self.current_player, 
-			players.ComPlayer):
+		while isinstance(self.current_player, players.ComPlayer) and \
+			not self._game_is_over:
 			self.current_player.play()			
 			self._end_turn()
-		pass
 	
 	def _on_click(self, x, y):
 		"""Defines what happens in a human turn."""
 		
 		# convert coordinates to (row, column)
-		row = int(y / self._sqaure_size)
-		column = int(x / self._sqaure_size)
+		row = int(y / self._board.sqaure_size)
+		column = int(x / self._board.sqaure_size)
 		
 		if self._board.square_is_empty(row, column):
 			self._board.put_sign(row, column, self.current_player.get_sign())
@@ -92,13 +91,12 @@ class Game():
 		
 		# switch turn to the next player
 		self.current_player = next(self.players)
-		pass
 	
 	def _end_game(self, msg):
 		"""print who wins and disable farther playing."""
 		
 		self._game_is_over = True
-		announce(self._board.size, self._sqaure_size ,msg)
+		announce(self._board.size, self._board.sqaure_size ,msg)
 		
 		# disable farther clicking on the screen
 		onscreenclick(None)

@@ -3,20 +3,17 @@
 """
 Tic Tac Toe
 
-This program implements a X/O (Tic Tac Toe) game with an optional unbeatable 
-computer player.
-
-This implementaion is based on 'turtle' graphics library and the idea of making 
-this game was inspired from 'Free Python Games' - a collection of games 
-programming challanges in pyhon:
-http://www.grantjenks.com/docs/freegames/
+A pythonic OOD implementation for 'X/O' (Tic Tac Toe) game with an optional
+unbeatable computer player.
+Based on 'turtle' graphics library.
 
 Enjoy :)
 """
 
 import turtle
-import game
+from game import *
 
+# constants
 SQAURE_SIZE = 150
 BOARD_SIZE = 3
 WND_SIZE = SQAURE_SIZE * BOARD_SIZE
@@ -25,27 +22,23 @@ WND_SIZE = SQAURE_SIZE * BOARD_SIZE
 turtle.setup(WND_SIZE, WND_SIZE)
 turtle.setworldcoordinates(0,0, WND_SIZE, WND_SIZE)
 turtle.title("X / O")
-# turtle.tracer(False)
-
+# turtle.tracer(False) # Turn On/Off the tracer animation
 
 # set the board
-game = game.Game(sqaure_size=SQAURE_SIZE,
-	player2=(game.COMPUTER,'X'),
-	player1=(game.HUMAN,'O'))
+game = Game(sqaure_size=SQAURE_SIZE,
+	player1=(HUMAN, O_SIGN),
+	player2=(COMPUTER, X_SIGN))
+	
+# in case the COMPUTER plays first - makes a move.
 game.run()
-turtle.done() # keeps the screen on.
+
+# waits for clicking events.
+turtle.done()
 
 
-# TODO: Advanced features:
+
+
+# TODO: Advanced features for next versions:
 # TODO: add buttons like human/AI and first player sign ('X'/'O').
-# TODO: main loop. sleeps when its human turn until the click. how?
-# TODO: board - overload the operator [][]
-# TODO: variable board size + rules.
 
 
-# How to add buttons:
-# crate the window with TK, then use rawturtle.
-# https://stackoverflow.com/questions/44653500/integrate-turtle-module-with-tkinter-canvas
-
-# How to compile into exe file:
-# auto-py-to-exe
