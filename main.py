@@ -28,17 +28,14 @@ turtle.title("X / O")
 game = Game(sqaure_size=SQAURE_SIZE,
 	player1=(HUMAN, O_SIGN),
 	player2=(COMPUTER, X_SIGN))
-	
-# in case the COMPUTER plays first - makes a move.
+
+# starts the game
 game.run()
 
-# waits for clicking events.
+# keeps the game window open
 turtle.done()
 
 
 
-
-# TODO: Advanced features for next versions:
-# TODO: add buttons like human/AI and first player sign ('X'/'O').
 
 

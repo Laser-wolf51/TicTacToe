@@ -49,9 +49,6 @@ class Game():
 		self.players = cycle(players_list)
 		self.current_player = next(self.players)
 		
-		# define behaviour on click
-		onscreenclick(self._on_click)
-		
 		# draw gird
 		self._board.draw_grid()
 	
@@ -63,6 +60,10 @@ class Game():
 			not self._game_is_over:
 			self.current_player.play()			
 			self._end_turn()
+		
+		if not self._game_is_over:
+			# its human turn. wait for a click from the user
+			onscreenclick(self._on_click)
 	
 	def _on_click(self, x, y):
 		"""Defines what happens in a human turn."""
@@ -72,6 +73,8 @@ class Game():
 		column = int(x / self._board.sqaure_size)
 		
 		if self._board.square_is_empty(row, column):
+			# stop react to farther clicks
+			onscreenclick(None)
 			self._board.put_sign(row, column, self.current_player.get_sign())
 			self._end_turn()
 			self.run()
