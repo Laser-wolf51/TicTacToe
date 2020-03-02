@@ -2,8 +2,8 @@
 
 import abc
 
-from constants import *
-from board import Board
+from .constants import *
+from .board import Board
 
 
 def create_new_player(type_, sign, board: Board):

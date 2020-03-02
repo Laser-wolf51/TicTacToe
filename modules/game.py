@@ -3,11 +3,11 @@
 from itertools import cycle
 from turtle import onscreenclick
 
-import constants
-import players
-from graphic_utils import announce
-from board import Board
-from logic import GameLogic
+from . import constants
+from . import players
+from .board import Board
+from .logic import GameLogic
+from .graphic_utils import announce
 """check 2"""
 
 # constants for costume players:

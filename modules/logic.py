@@ -1,6 +1,6 @@
 # Filename: game.py
 
-from board import Board
+from .board import Board
 
 class GameLogic():
 	"""Checks winning/losing state for the given board and player."""

@@ -11,7 +11,7 @@ Enjoy :)
 """
 
 import turtle
-from game import *
+from modules.game import *
 
 # constants
 SQAURE_SIZE = 150
@@ -22,12 +22,12 @@ WND_SIZE = SQAURE_SIZE * BOARD_SIZE
 turtle.setup(WND_SIZE, WND_SIZE)
 turtle.setworldcoordinates(0,0, WND_SIZE, WND_SIZE)
 turtle.title("X / O")
-# turtle.tracer(False) # Turn On/Off the tracer animation
+# turtle.tracer(False) # Turns Off the tracer animation
 
 # set the board
 game = Game(sqaure_size=SQAURE_SIZE,
-	player1=(HUMAN, O_SIGN),
-	player2=(COMPUTER, X_SIGN))
+	player1=(COMPUTER, O_SIGN),
+	player2=(HUMAN, X_SIGN))
 
 # starts the game
 game.run()

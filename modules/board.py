@@ -1,7 +1,7 @@
 # Filename: board.py
 
-import graphic_utils
-from constants import *
+from . import graphic_utils
+from .constants import *
 
 class Board():
 	"""
