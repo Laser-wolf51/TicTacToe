@@ -1,5 +1,8 @@
 # TicTacToe
-A pythonic OOD implementation for 'X/O' (Tic Tac Toe) game with an optional
+
+![](name-of-giphy.gif)
+
+A pythonic OOP implementation for 'X/O' (Tic Tac Toe) game with an optional
 unbeatable computer player.
 Based on 'turtle' graphics library.
 
