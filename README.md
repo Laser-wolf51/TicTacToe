@@ -1,6 +1,6 @@
 # TicTacToe
 
-![](Sample.gif)
+![](sample.gif)
 
 A pythonic OOP implementation for 'X/O' (Tic Tac Toe) game with an optional
 unbeatable computer player.
