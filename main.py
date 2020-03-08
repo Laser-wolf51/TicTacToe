@@ -11,7 +11,7 @@ Enjoy :)
 """
 
 import turtle
-from modules.game import *
+from game_objects.game import *
 
 # constants
 SQAURE_SIZE = 150
