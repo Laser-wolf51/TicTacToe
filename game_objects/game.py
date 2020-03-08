@@ -84,7 +84,7 @@ class Game():
 		
 		# checks winning
 		if self._logic.is_player_winner(self.current_player.get_sign()):
-			self._end_game(self.current_player.get_sign() + 'Wins!!')
+			self._end_game(self.current_player.get_sign() + ' Wins!!')
 			return
 		
 		# checks draw

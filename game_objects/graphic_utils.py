@@ -70,7 +70,7 @@ def announce(board_size, sqaure_size, msg):
     turtle.down()
     
     # print final msg
-    turtle.write(msg, align="center", font=("Arial", 30, "normal"))
+    turtle.write(msg, align="center", font=("Arial", 40, "normal"))
     turtle.up()
     
     return
