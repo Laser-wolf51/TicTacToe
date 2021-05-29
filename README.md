@@ -1,4 +1,4 @@
-# TicTacToe
+# Unbeatable X/O
 
 ![](sample.gif)
 
